@@ -2,14 +2,6 @@
 #include <clocale>
 #include "modAlphaCipher.h"
 using namespace std;
-void key_validation(wstring &key, const wstring &text, modAlphaCipher &cip)
-{
-    key = cip.getValidString(key);
-    while (key.length() < text.length()) {
-        key += key.substr(0, text.length() - key.length()); 
-    }
-    wcout << key << endl;
-}
 int main(int argc, char **argv)
 {
     try
@@ -35,8 +27,7 @@ int main(int argc, char **argv)
             {
                 wcout << L"Cipher ready. Input text: ";
                 wcin >> text;
-                key_validation(key, text, cipher);
-                cipher.start(key);
+                cipher.start(cipher.key_validation(key, text));
                 if (op == 1)
                 {
                     wcout << L"Encrypted text: " << cipher.encrypt(text) << endl;

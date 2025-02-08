@@ -77,6 +77,8 @@ std::string table_cipher::decrypt()
     return res;
 }
 void table_cipher::text_validation(std::string &text){
+    if (text.empty())
+        throw table_cipher_error("Пустые данные");
     for (int i = 0; i < text.length(); i++)
     {
         if(!isalpha(text[i])){
